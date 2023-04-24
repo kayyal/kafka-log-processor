@@ -33,7 +33,8 @@ public class FileIngesture {
 
       for (WatchEvent<?> event : key.pollEvents()) {
         Path filePath = logDirectory.resolve((Path) event.context());
-        String fileName = filePath.toString();
+        String fileName =extractComponentName(filePath.toString());
+        System.out.println("fileName = " + fileName);
         if (fileName.endsWith(".log")) {
           System.out.println("New log file detected: " + fileName);
           StringBuilder contentBuilder = new StringBuilder();
@@ -61,6 +62,14 @@ public class FileIngesture {
       return logContents;
 
     }
+
+    public static String extractComponentName(String logFilePath) {
+      String[] parts = logFilePath.split("\\\\"); // split the file path by backslashes
+      String fileName = parts[parts.length - 1]; // get the file name from the last part of the path
+      String[] fileNameParts = fileName.split("-"); // split the file name by hyphens
+      return fileNameParts[0];
+    }
+
   }
 
 
