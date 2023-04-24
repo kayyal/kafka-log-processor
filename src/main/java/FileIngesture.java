@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
@@ -16,12 +18,13 @@ public class FileIngesture {
     fileCheckerReader("C:\\Users\\amirk\\IdeaProjects\\kafka-log-processor\\logs\\logs");
   }
 
-  public static Map<String , String > fileCheckerReader(String path ) throws IOException {
+  public static Map<String, String> fileCheckerReader(String path) throws IOException {
     Path logDirectory = Path.of(path);
     WatchService watchService = FileSystems.getDefault().newWatchService();
     logDirectory.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
     Map<String, String> logContents = new HashMap<>();
 
+    logContents = readExistingLogFiles(logDirectory);
     System.out.println("Monitoring directory for new log files...");
     while (true) {
       WatchKey key;
@@ -29,7 +32,7 @@ public class FileIngesture {
         key = watchService.take();
       } catch (InterruptedException e) {
         System.out.println("exception happaneed !!");
-        return null;
+        throw new AssertionError();
       }
 
       for (WatchEvent<?> event : key.pollEvents()) {
@@ -75,5 +78,32 @@ public class FileIngesture {
     String[] fileNameParts = fileName.split("-"); // split the file name by hyphens
     return fileNameParts[0];
   }
+
+
+  private static Map<String, String> readExistingLogFiles(Path logDirectory) throws IOException {
+    Map<String, String> logContents = new HashMap<>();
+    DirectoryStream<Path> stream = Files.newDirectoryStream(logDirectory, "*.log");
+    for (Path filePath : stream) {
+      String fileFullpath = filePath.toString();
+      String fileName = extractComponentName(filePath.toString());
+      System.out.println("Reading existing log file: " + fileFullpath);
+      StringBuilder contentBuilder = new StringBuilder();
+      try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+          contentBuilder.append(line);
+          contentBuilder.append("\n");
+        }
+      } catch (IOException e) {
+        System.err.println("Error reading log file: " + fileFullpath);
+        e.printStackTrace();
+      }
+      String fileContent = contentBuilder.toString();
+      logContents.put(fileFullpath, fileContent);
+    }
+    stream.close();
+    return logContents;
+  }
+
 
 }
