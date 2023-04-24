@@ -12,9 +12,9 @@ import java.util.Map;
 
 public class FileIngesture {
 
-//  public static void main(String[] args) throws IOException {
-//    fileCheckerReader("C:\\Users\\amirk\\IdeaProjects\\kafka-log-processor\\logs\\logs");
-//  }
+  public static void main(String[] args) throws IOException {
+    fileCheckerReader("C:\\Users\\amirk\\IdeaProjects\\kafka-log-processor\\logs\\logs");
+  }
 
   public static Map<String , String > fileCheckerReader(String path ) throws IOException {
     Path logDirectory = Path.of(path);
@@ -23,20 +23,23 @@ public class FileIngesture {
     Map<String, String> logContents = new HashMap<>();
 
     System.out.println("Monitoring directory for new log files...");
-//    while (true) {
+    while (true) {
       WatchKey key;
       try {
         key = watchService.take();
       } catch (InterruptedException e) {
+        System.out.println("exception happaneed !!");
         return null;
       }
 
       for (WatchEvent<?> event : key.pollEvents()) {
         Path filePath = logDirectory.resolve((Path) event.context());
-        String fileName =extractComponentName(filePath.toString());
-        System.out.println("fileName = " + fileName);
-        if (fileName.endsWith(".log")) {
-          System.out.println("New log file detected: " + fileName);
+        String fileFullPath = filePath.toString();
+        String fileName = extractComponentName(filePath.toString());
+        System.out.println("fileFullPath = " + fileFullPath);
+
+        if (fileFullPath.endsWith(".log")) {
+          System.out.println("New log file detected: " + fileFullPath);
           StringBuilder contentBuilder = new StringBuilder();
           try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
             String line;
@@ -45,7 +48,7 @@ public class FileIngesture {
               contentBuilder.append("\n");
             }
           } catch (IOException e) {
-            System.err.println("Error reading log file: " + fileName);
+            System.err.println("Error reading log file: " + fileFullPath);
             e.printStackTrace();
           }
           String fileContent = contentBuilder.toString();
@@ -55,24 +58,22 @@ public class FileIngesture {
       }
 
       boolean reset = key.reset();
+
       if (!reset) {
         System.err.println("WatchKey has been invalidated, exiting...");
 
       }
+
       return logContents;
-
-    }
-
-    public static String extractComponentName(String logFilePath) {
-      String[] parts = logFilePath.split("\\\\"); // split the file path by backslashes
-      String fileName = parts[parts.length - 1]; // get the file name from the last part of the path
-      String[] fileNameParts = fileName.split("-"); // split the file name by hyphens
-      return fileNameParts[0];
     }
 
   }
 
+  public static String extractComponentName(String logFilePath) {
+    String[] parts = logFilePath.split("\\\\"); // split the file path by backslashes
+    String fileName = parts[parts.length - 1]; // get the file name from the last part of the path
+    String[] fileNameParts = fileName.split("-"); // split the file name by hyphens
+    return fileNameParts[0];
+  }
 
-
-
-
+}

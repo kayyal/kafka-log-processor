@@ -40,12 +40,12 @@ public class ProducerDemo {
 //    producer.send(producerRecord);
 
 
- // create producer record and send data in asynchronous way
+    // create producer record and send data in asynchronous way
     try {
       for (Map.Entry<String, String> entry : logFiles.entrySet()) {
         String key = entry.getKey();
         String value = entry.getValue();
-        producer.send(new ProducerRecord<>("demo_java", key, value));
+        producer.send(new ProducerRecord<>("testt", key, value));
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -56,5 +56,4 @@ public class ProducerDemo {
 
 
 }
-
 

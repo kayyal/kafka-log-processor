@@ -20,7 +20,7 @@ public class ConsumerDemo {
 
     String bootstrapServer = "127.0.0.1:9092";
     String groupId = "my-java-application";
-    String topic = "demo_java";
+    String topic = "testt";
 
     // create Consumer Config
     Properties properties = new Properties();
