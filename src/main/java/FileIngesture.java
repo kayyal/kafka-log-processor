@@ -99,31 +99,3 @@ public class FileIngesture {
   }
 
 }
-
- /* private static Map<String, String> readExistingLogFiles(Path logDirectory) throws IOException {
-    Map<String, String> logContents = new HashMap<>();
-    DirectoryStream<Path> stream = Files.newDirectoryStream(logDirectory, "*.log");
-    for (Path filePath : stream) {
-      String fileFullpath = filePath.toString();
-      String fileName = extractComponentName(filePath.toString());
-      System.out.println("Reading existing log file: " + fileFullpath);
-      StringBuilder contentBuilder = new StringBuilder();
-      try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-          contentBuilder.append(line);
-          contentBuilder.append("\n");
-        }
-      } catch (IOException e) {
-        System.err.println("Error reading log file: " + fileFullpath);
-        e.printStackTrace();
-      }
-      String fileContent = contentBuilder.toString();
-      logContents.put(fileFullpath, fileContent);
-    }
-    stream.close();
-    return logContents;
-  }
-
-
-}*/

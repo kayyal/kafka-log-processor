@@ -27,7 +27,6 @@ public class ProducerDemo {
       }
 
     }).start();
-    System.out.println("this is sdfdfsfd");
     Map<String, String> logFiles = fileIngesture.getLogContents();
 
     log.info("A Kafka Producer");
