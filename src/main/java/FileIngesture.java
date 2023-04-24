@@ -14,62 +14,21 @@ import java.util.Map;
 
 public class FileIngesture {
 
-  public static void main(String[] args) throws IOException {
-    fileCheckerReader("C:\\Users\\amirk\\IdeaProjects\\kafka-log-processor\\logs\\logs");
+  private final WatchService watchService;
+  private final Path logDirectory;
+  private final Map<String, String> logContents;
+
+  public FileIngesture(Path logDirectory) throws IOException {
+    this.logDirectory = logDirectory;
+    this.watchService = FileSystems.getDefault().newWatchService();
+    this.logDirectory.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
+    this.logContents = new HashMap<>();
   }
 
-  public static Map<String, String> fileCheckerReader(String path) throws IOException {
-    Path logDirectory = Path.of(path);
-    WatchService watchService = FileSystems.getDefault().newWatchService();
-    logDirectory.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
-    Map<String, String> logContents = new HashMap<>();
-
-    logContents = readExistingLogFiles(logDirectory);
-    System.out.println("Monitoring directory for new log files...");
-    while (true) {
-      WatchKey key;
-      try {
-        key = watchService.take();
-      } catch (InterruptedException e) {
-        System.out.println("exception happaneed !!");
-        throw new AssertionError();
-      }
-
-      for (WatchEvent<?> event : key.pollEvents()) {
-        Path filePath = logDirectory.resolve((Path) event.context());
-        String fileFullPath = filePath.toString();
-        String fileName = extractComponentName(filePath.toString());
-        System.out.println("fileFullPath = " + fileFullPath);
-
-        if (fileFullPath.endsWith(".log")) {
-          System.out.println("New log file detected: " + fileFullPath);
-          StringBuilder contentBuilder = new StringBuilder();
-          try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-              contentBuilder.append(line);
-              contentBuilder.append("\n");
-            }
-          } catch (IOException e) {
-            System.err.println("Error reading log file: " + fileFullPath);
-            e.printStackTrace();
-          }
-          String fileContent = contentBuilder.toString();
-          logContents.put(fileName, fileContent);
-          System.out.println("File contents saved to HashMap.");
-        }
-      }
-
-      boolean reset = key.reset();
-
-      if (!reset) {
-        System.err.println("WatchKey has been invalidated, exiting...");
-
-      }
-
-      return logContents;
-    }
-
+  public static void main(String[] args) throws IOException {
+//    Path logDirectory = Path.of("path/to/directory");
+//    FileIngesture fileIngesture = new FileIngesture(logDirectory);
+//    fileIngesture.start();
   }
 
   public static String extractComponentName(String logFilePath) {
@@ -79,8 +38,69 @@ public class FileIngesture {
     return fileNameParts[0];
   }
 
+  public Map<String, String> getLogContents() {
+    return logContents;
+  }
 
-  private static Map<String, String> readExistingLogFiles(Path logDirectory) throws IOException {
+  public void start() throws IOException {
+    readExistingLogFiles();
+    System.out.println("Monitoring directory for new log files...");
+    while (true) {
+      WatchKey key;
+      try {
+        key = watchService.take();
+      } catch (InterruptedException e) {
+        return;
+      }
+      for (WatchEvent<?> event : key.pollEvents()) {
+        Path filePath = logDirectory.resolve((Path) event.context());
+        String fileName = filePath.toString();
+        if (fileName.endsWith(".log")) {
+          System.out.println("New log file detected: " + fileName);
+          String fileContent = readFileContent(filePath);
+          logContents.put(fileName, fileContent);
+          System.out.println("File contents saved to HashMap.");
+          System.out.println(fileName + fileName);
+        }
+      }
+      boolean reset = key.reset();
+      if (!reset) {
+        System.err.println("WatchKey has been invalidated, exiting...");
+        return;
+      }
+    }
+  }
+
+  private void readExistingLogFiles() throws IOException {
+    DirectoryStream<Path> stream = Files.newDirectoryStream(logDirectory, "*.log");
+    for (Path filePath : stream) {
+      String fileName = filePath.toString();
+      System.out.println("Reading existing log file: " + fileName);
+      String fileContent = readFileContent(filePath);
+      logContents.put(fileName, fileContent);
+    }
+    stream.close();
+    System.out.println("Existing log files read and saved to HashMap.");
+  }
+
+  private String readFileContent(Path filePath) {
+    StringBuilder contentBuilder = new StringBuilder();
+    try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
+      String line;
+      while ((line = reader.readLine()) != null) {
+        contentBuilder.append(line);
+        contentBuilder.append("\n");
+      }
+    } catch (IOException e) {
+      System.err.println("Error reading log file: " + filePath.toString());
+      e.printStackTrace();
+    }
+    return contentBuilder.toString();
+  }
+
+}
+
+ /* private static Map<String, String> readExistingLogFiles(Path logDirectory) throws IOException {
     Map<String, String> logContents = new HashMap<>();
     DirectoryStream<Path> stream = Files.newDirectoryStream(logDirectory, "*.log");
     for (Path filePath : stream) {
@@ -106,4 +126,4 @@ public class FileIngesture {
   }
 
 
-}
+}*/

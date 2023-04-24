@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -14,8 +15,20 @@ public class ProducerDemo {
   private static final Logger log = LoggerFactory.getLogger(ProducerDemo.class.getSimpleName());
 
   public static void main(String[] args) throws IOException {
-    Map<String, String> logFiles = FileIngesture.fileCheckerReader(
-        "C:\\Users\\amirk\\IdeaProjects\\kafka-log-processor\\logs\\logs");
+
+    Path path = Path.of("C:\\Users\\amirk\\IdeaProjects\\kafka-log-processor\\logs\\logs");
+
+    FileIngesture fileIngesture = new FileIngesture(path);
+    new Thread(()->{
+      try {
+        fileIngesture.start();
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+
+    }).start();
+    System.out.println("this is sdfdfsfd");
+    Map<String, String> logFiles = fileIngesture.getLogContents();
 
     log.info("A Kafka Producer");
     String bootstrapServers = "127.0.0.1:9092";
@@ -38,7 +51,6 @@ public class ProducerDemo {
 //
 //    // send data in asynchronous way
 //    producer.send(producerRecord);
-
 
     // create producer record and send data in asynchronous way
     try {
