@@ -38,20 +38,34 @@ public class ConsumerDemo {
     consumer.subscribe(Arrays.asList(topic));
 
     // poll for data
-    while (true) {
 
-      log.info("Polling");
-
-      ConsumerRecords<String, String> records =
-          consumer.poll(Duration.ofMillis(1000));
-
-      for (ConsumerRecord<String, String> record: records) {
-        log.info("Key: " + record.key() + ", Value: " + record.value());
-        log.info("Partition: " + record.partition() + ", Offset: " + record.offset());
+    try {
+      while (true) {
+        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+        for (ConsumerRecord<String, String> record : records) {
+          System.out.printf("Received message: key=%s, value=%s%n", record.key(), record.value());
+        }
       }
-
-
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      consumer.close();
     }
+
+//    while (true) {
+//
+//      log.info("Polling");
+//
+//      ConsumerRecords<String, String> records =
+//          consumer.poll(Duration.ofMillis(1000));
+//
+//      for (ConsumerRecord<String, String> record: records) {
+//        log.info("Key: " + record.key() + ", Value: " + record.value());
+//        log.info("Partition: " + record.partition() + ", Offset: " + record.offset());
+//      }
+//
+//
+//    }
 
   }
 
