@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Component {
 
-  private String name;
+  private final String name;
   private List<LogMessage> logMessages;
 
   public Component(String name, List<LogMessage> logMessages) {
@@ -33,7 +33,7 @@ public class Component {
       List<LogMessage> logMessages = new ArrayList<>();
       for (String logValue : logValues) {
 //        System.out.println("logValue = " + logValue);
-        if (logValue.length()<13){
+        if (logValue.length() < 13) {
           continue;
         }
         // TODO
@@ -68,25 +68,5 @@ public class Component {
     return count;
   }
 
-  public boolean hasExceededThresholdInLastFiveMinutes(String type, int threshold) {
-    int count = 0;
-    long currentTime = System.currentTimeMillis();
-    long fiveMinutesAgo = currentTime - (5 * 60 * 1000);
-    for (LogMessage logMessage : logMessages) {
-      if (logMessage.getLogType().equals(type)) {
-        String timestampString = logMessage.getDate() + " " + logMessage.getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss,SSS");
-        try {
-          Date timestamp = dateFormat.parse(timestampString);
-          if (timestamp.getTime() >= fiveMinutesAgo && timestamp.getTime() <= currentTime) {
-            count++;
-          }
-        } catch (ParseException e) {
-          // handle parse exception
-        }
-      }
-    }
-    return count > threshold;
-  }
 
 }
