@@ -1,0 +1,6 @@
+Rule_1 : logType = ERROR , Treshhold = 10 , timeWindow = 5min
+Rule_2 : logType = CRITICAL , Treshhold = 23 , timeWindow = 5min
+Rule_3 : logType = DEBUG , Treshhold = 7 , timeWindow = 9min
+Rule_4 : logType = WARNING , Treshhold = 10 , timeWindow = 5min
+Rule_5 : logType = INFO , Treshhold = 6 , timeWindow = 7min
+Rule_6 : logType = ALL , Treshhold = 5 , timeWindow = 3min

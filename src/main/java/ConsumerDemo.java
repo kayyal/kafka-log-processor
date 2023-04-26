@@ -43,7 +43,7 @@ public class ConsumerDemo {
     // poll for data
     try {
       while (true) {
-        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
         for (ConsumerRecord<String, String> record : records) {
           logFiles.put(extractComponentName(record.key()), record.value());
           List<Component> components = Component.createComponents(logFiles);
@@ -51,9 +51,11 @@ public class ConsumerDemo {
           for (Component component : components) {
             for (LogMessage logMessage : component.getLogMessages()) {
             }
-            LogAnalyzer.hasExceededThresholdWithinTimeWindow(component.getLogMessages(), 1, "ERROR",
+            LogAnalyzer.hasExceededThresholdWithinTimeWindow(component.getLogMessages(), 5, "ERROR",
                 5);
-
+            RuleEvaluator ruleEvaluator = new RuleEvaluator(
+                "C:\\Users\\amirk\\IdeaProjects\\kafka-log-processor\\logs\\rules.txt");
+            ruleEvaluator.evaluate(component.getLogMessages());
           }
 
         }

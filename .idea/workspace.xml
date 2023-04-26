@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c1fb947-d692-4786-9e50-48ce13960517" name="Changes" comment="Add LogAnalyzer Class">
+    <list default="true" id="1c1fb947-d692-4786-9e50-48ce13960517" name="Changes" comment="Remove commented code and unused imports">
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/config.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ConsumerDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ConsumerDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileIngesture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FileIngesture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RuleEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RuleEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Component.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Component.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ConsumerDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ConsumerDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FileIngesture.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FileIngesture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/LogMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/LogMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RuleEvaluator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RuleEvaluator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,17 +45,21 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\amirk\IdeaProjects\kafka-log-processor" />
     </key>
   </component>
   <component name="RunManager" selected="Application.ConsumerDemo">
@@ -96,7 +108,8 @@
       <workItem from="1682264348097" duration="6700000" />
       <workItem from="1682315897356" duration="26758000" />
       <workItem from="1682406298930" duration="16792000" />
-      <workItem from="1682489020890" duration="14074000" />
+      <workItem from="1682489020890" duration="20501000" />
+      <workItem from="1682525467412" duration="1733000" />
     </task>
     <task id="LOCAL‎۰۰۰۰۱" summary="Add FileIngesture class">
       <created>1682272736488</created>
@@ -176,7 +189,13 @@
       <option name="presentableId" value="LOCAL‎۰۰۰۱۳" />
       <updated>1682510316991</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL‎۰۰۰۱۴" summary="Remove commented code and unused imports">
+      <created>1682511577868</created>
+      <option name="number" value="LOCAL‎۰۰۰۱۴" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۱۴" />
+      <updated>1682511577868</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +230,8 @@
     <MESSAGE value="Delete hasExceededThresholdInLastFiveMinutes method from Component Class" />
     <MESSAGE value="Add getDateTime to LogMessage Class" />
     <MESSAGE value="Add LogAnalyzer Class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add LogAnalyzer Class" />
+    <MESSAGE value="Remove commented code and unused imports" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove commented code and unused imports" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
