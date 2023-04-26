@@ -61,10 +61,9 @@ public class ProducerDemo {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-      producer.close();
+//      producer.close();
     }
   }
-
 
 }
 

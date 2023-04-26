@@ -25,12 +25,6 @@ public class FileIngesture {
     this.logContents = new HashMap<>();
   }
 
-  public static void main(String[] args) throws IOException {
-//    Path logDirectory = Path.of("path/to/directory");
-//    FileIngesture fileIngesture = new FileIngesture(logDirectory);
-//    fileIngesture.start();
-  }
-
   public static String extractComponentName(String logFilePath) {
     String[] parts = logFilePath.split("\\\\"); // split the file path by backslashes
     String fileName = parts[parts.length - 1]; // get the file name from the last part of the path
@@ -60,7 +54,7 @@ public class FileIngesture {
           String fileContent = readFileContent(filePath);
           logContents.put(fileName, fileContent);
           System.out.println("File contents saved to HashMap.");
-          System.out.println(fileName + fileName);
+//          System.out.println(fileName + fileName);
         }
       }
       boolean reset = key.reset();
