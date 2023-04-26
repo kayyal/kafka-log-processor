@@ -1,7 +1,3 @@
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.*;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -10,7 +6,6 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
@@ -49,30 +44,19 @@ public class ConsumerDemo {
     try {
       while (true) {
         ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-//        LocalDateTime fiveMinutesAgo = LocalDateTime.now().minusMinutes(10);
         for (ConsumerRecord<String, String> record : records) {
-//          System.out.printf("Received message: key=%s, value=%s%n", record.key(), record.value());
           logFiles.put(extractComponentName(record.key()), record.value());
           List<Component> components = Component.createComponents(logFiles);
 
           for (Component component : components) {
             for (LogMessage logMessage : component.getLogMessages()) {
-//              System.out.println("logMessage.getTime() = " + logMessage.getTime());
-//              System.out.println("logMessage.getLogType() = " + logMessage.getLogType());
-//              System.out.println("logMessage.getDate() = " + logMessage.getDate());
             }
             LogAnalyzer.hasExceededThresholdWithinTimeWindow(component.getLogMessages(), 1, "ERROR",
                 5);
-//            if (component.hasExceededThresholdInLastFiveMinutes("ERROR", 1)) {
-//              System.out.println("Component " + component.getName() + " has exceeded the error threshold in the last 5 minutes.");
-//            }
+
           }
 
         }
-//        messageList.addAll(convertToMessages(logFiles));
-//        messageList = messageList.stream()
-//            .filter(msg -> msg.getLocalDateTime().isAfter(fiveMinutesAgo))
-//            .collect(Collectors.toList());
 
       }
 
