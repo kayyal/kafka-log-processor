@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c1fb947-d692-4786-9e50-48ce13960517" name="Changes" comment="Add FileIngesture class">
+    <list default="true" id="1c1fb947-d692-4786-9e50-48ce13960517" name="Changes" comment="add message Class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ConsumerDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ConsumerDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileIngesture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FileIngesture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ProducerDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProducerDemo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ConsumerDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ConsumerDemo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/FileIngesture.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FileIngesture.class" afterDir="false" />
@@ -47,7 +49,12 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.ConsumerDemo">
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ProducerDemo">
     <configuration name="ConsumerDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ConsumerDemo" />
       <module name="kafka-log-processor" />
@@ -71,8 +78,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ConsumerDemo" />
         <item itemvalue="Application.ProducerDemo" />
+        <item itemvalue="Application.ConsumerDemo" />
         <item itemvalue="Application.FileIngesture" />
       </list>
     </recent_temporary>
@@ -91,7 +98,9 @@
       <workItem from="1682239969828" duration="893000" />
       <workItem from="1682241068620" duration="2581000" />
       <workItem from="1682264348097" duration="6700000" />
-      <workItem from="1682315897356" duration="5272000" />
+      <workItem from="1682315897356" duration="26758000" />
+      <workItem from="1682406298930" duration="16792000" />
+      <workItem from="1682489020890" duration="5037000" />
     </task>
     <task id="LOCAL‎۰۰۰۰۱" summary="Add FileIngesture class">
       <created>1682272736488</created>
@@ -99,7 +108,49 @@
       <option name="presentableId" value="LOCAL‎۰۰۰۰۱" />
       <updated>1682272736488</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎۰۰۰۰۲" summary="complete producer Class">
+      <created>1682323545489</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۲" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۲" />
+      <updated>1682323545489</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۳" summary="Add extractComponentName to FileIngesture Class">
+      <created>1682334040411</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۳" />
+      <updated>1682334040412</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۴" summary="fix a bug in FileIngesture">
+      <created>1682349229702</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۴" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۴" />
+      <updated>1682349229702</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۵" summary="Add readExistingLogFiles method to FileIngesture">
+      <created>1682353013579</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۵" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۵" />
+      <updated>1682353013579</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۶" summary="Refactor FileIngesture and add a thread to ProducerDemo">
+      <created>1682364140647</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۶" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۶" />
+      <updated>1682364140647</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۷" summary="delete some comment">
+      <created>1682366841053</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۷" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۷" />
+      <updated>1682366841053</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۸" summary="add message Class">
+      <created>1682416097510</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۸" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۸" />
+      <updated>1682416097510</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,7 +172,15 @@
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
     <MESSAGE value="Add FileIngesture class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add FileIngesture class" />
+    <MESSAGE value="complete producer Class" />
+    <MESSAGE value="Add extractComponentName to FileIngesture Class" />
+    <MESSAGE value="Add path variable to ProducerDemo Class" />
+    <MESSAGE value="fix a bug in FileIngesture" />
+    <MESSAGE value="Add readExistingLogFiles method to FileIngesture" />
+    <MESSAGE value="Refactor FileIngesture and add a thread to ProducerDemo" />
+    <MESSAGE value="delete some comment" />
+    <MESSAGE value="add message Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="add message Class" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
