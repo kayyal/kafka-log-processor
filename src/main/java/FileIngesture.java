@@ -86,7 +86,7 @@ public class FileIngesture {
         contentBuilder.append("\n");
       }
     } catch (IOException e) {
-      System.err.println("Error reading log file: " + filePath.toString());
+      System.err.println("Error reading log file: " + filePath);
       e.printStackTrace();
     }
     return contentBuilder.toString();

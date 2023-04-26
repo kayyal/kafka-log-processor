@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c1fb947-d692-4786-9e50-48ce13960517" name="Changes" comment="add message Class">
+    <list default="true" id="1c1fb947-d692-4786-9e50-48ce13960517" name="Changes" comment="add logMessage and Componenet Class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Component.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ConsumerDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ConsumerDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileIngesture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FileIngesture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProducerDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProducerDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/LogMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LogMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Component.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Component.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ConsumerDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ConsumerDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FileIngesture.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FileIngesture.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ProducerDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ProducerDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/LogMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/LogMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Message.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +54,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ProducerDemo">
+  <component name="RunManager" selected="Application.ConsumerDemo">
     <configuration name="ConsumerDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ConsumerDemo" />
       <module name="kafka-log-processor" />
@@ -78,8 +78,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ProducerDemo" />
         <item itemvalue="Application.ConsumerDemo" />
+        <item itemvalue="Application.ProducerDemo" />
         <item itemvalue="Application.FileIngesture" />
       </list>
     </recent_temporary>
@@ -100,7 +100,7 @@
       <workItem from="1682264348097" duration="6700000" />
       <workItem from="1682315897356" duration="26758000" />
       <workItem from="1682406298930" duration="16792000" />
-      <workItem from="1682489020890" duration="5037000" />
+      <workItem from="1682489020890" duration="12635000" />
     </task>
     <task id="LOCAL‎۰۰۰۰۱" summary="Add FileIngesture class">
       <created>1682272736488</created>
@@ -150,7 +150,19 @@
       <option name="presentableId" value="LOCAL‎۰۰۰۰۸" />
       <updated>1682416097510</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎۰۰۰۰۹" summary="delete message Class">
+      <created>1682496705401</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۹" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۹" />
+      <updated>1682496705402</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۱۰" summary="add logMessage and Componenet Class">
+      <created>1682496755474</created>
+      <option name="number" value="LOCAL‎۰۰۰۱۰" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۱۰" />
+      <updated>1682496755474</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +192,9 @@
     <MESSAGE value="Refactor FileIngesture and add a thread to ProducerDemo" />
     <MESSAGE value="delete some comment" />
     <MESSAGE value="add message Class" />
-    <option name="LAST_COMMIT_MESSAGE" value="add message Class" />
+    <MESSAGE value="delete message Class" />
+    <MESSAGE value="add logMessage and Componenet Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="add logMessage and Componenet Class" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

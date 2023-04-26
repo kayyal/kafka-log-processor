@@ -51,17 +51,18 @@ public class ConsumerDemo {
         ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 //        LocalDateTime fiveMinutesAgo = LocalDateTime.now().minusMinutes(10);
         for (ConsumerRecord<String, String> record : records) {
-          System.out.printf("Received message: key=%s, value=%s%n", record.key(), record.value());
+//          System.out.printf("Received message: key=%s, value=%s%n", record.key(), record.value());
           logFiles.put(extractComponentName(record.key()), record.value());
           List<Component> components = Component.createComponents(logFiles);
 
           for (Component component : components) {
             for (LogMessage logMessage : component.getLogMessages()) {
-              System.out.println("logMessage.getTime() = " + logMessage.getTime());
-              System.out.println("logMessage.getLogType() = " + logMessage.getLogType());
-              System.out.println("logMessage.getDate() = " + logMessage.getDate());
+//              System.out.println("logMessage.getTime() = " + logMessage.getTime());
+//              System.out.println("logMessage.getLogType() = " + logMessage.getLogType());
+//              System.out.println("logMessage.getDate() = " + logMessage.getDate());
             }
-
+            LogAnalyzer.hasExceededThresholdWithinTimeWindow(component.getLogMessages(), 1, "ERROR",
+                5);
 //            if (component.hasExceededThresholdInLastFiveMinutes("ERROR", 1)) {
 //              System.out.println("Component " + component.getName() + " has exceeded the error threshold in the last 5 minutes.");
 //            }
@@ -83,8 +84,6 @@ public class ConsumerDemo {
 
 
   }
-
-
 
 
   public static String extractComponentName(String logFilePath) {
