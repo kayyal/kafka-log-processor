@@ -1,10 +1,12 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class LogMessage {
 
-  private String date;
-  private String time;
-  private String logType;
+  private final String date;
+  private final String time;
+  private final String logType;
 
   public LogMessage(String date, String time, String logType) {
     this.date = date;
@@ -22,5 +24,10 @@ public class LogMessage {
 
   public String getLogType() {
     return logType;
+  }
+
+  public Date getDateTime() throws ParseException {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    return dateFormat.parse(date + " " + time);
   }
 }
