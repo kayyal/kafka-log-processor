@@ -28,7 +28,7 @@ public class RuleEvaluator {
     for (Rule rule : rules) {
       if (logAnalyzer.hasExceededThresholdWithinTimeWindow(logs, rule.getThreshold(),
           rule.getLogType(), rule.getTimeWindow())) {
-        storeMessageInDatabase(rule.getLogType(), new Date());
+        storeMessageInDatabase(rule.getLogType(), new Date(), rule.name);
       }
     }
   }
@@ -50,11 +50,13 @@ public class RuleEvaluator {
     return rules;
   }
 
-  private void storeMessageInDatabase(String logType, Date dateTime) throws SQLException {
-    String query = "INSERT INTO messages (log_type, date_time) VALUES (?, ?)";
+  private void storeMessageInDatabase(String logType, Date dateTime, String ruleName)
+      throws SQLException {
+    String query = "INSERT INTO messages (log_type, date_time , rule_name) VALUES (?, ? , ?)";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.setString(1, logType);
     statement.setTimestamp(2, new Timestamp(dateTime.getTime()));
+    statement.setString(3, ruleName);
     statement.executeUpdate();
   }
 
