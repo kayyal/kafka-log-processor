@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -52,17 +55,38 @@ public class ProducerDemo {
 //    producer.send(producerRecord);
 
     // create producer record and send data in asynchronous way
-    try {
-      for (Map.Entry<String, String> entry : logFiles.entrySet()) {
-        String key = entry.getKey();
-        String value = entry.getValue();
-        producer.send(new ProducerRecord<>("testt", key, value));
+    // Create a ScheduledExecutorService to run the task periodically
+    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
+// Define the task to be run periodically
+    Runnable task = () -> {
+      try {
+        for (Map.Entry<String, String> entry : logFiles.entrySet()) {
+          String key = entry.getKey();
+          String value = entry.getValue();
+          ProducerRecord<String, String> record = new ProducerRecord<>("testt", key, value);
+          producer.send(record, (metadata, exception) -> {
+            if (metadata != null) {
+              // Remove the entry from the HashMap after successful send
+//              logFiles.remove(key);
+            } else {
+              exception.printStackTrace();
+            }
+          });
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
       }
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-//      producer.close();
-    }
+    };
+
+// Schedule the task to run periodically
+    long initialDelay = 0;
+    long period = 5; // Choose your desired period in seconds
+    executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
+
+// Don't forget to close the producer and shutdown the executor when you're done
+//    producer.close();
+//    executor.shutdown();
   }
 
 }
